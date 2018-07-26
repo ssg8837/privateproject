@@ -6,6 +6,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="logic.myspring.mapper.LogicMapper">
 
+	<select id="selectLogicUser" parameterType="LogicUser" resultType="Integer">
+		SELECT COUNT(USERID) FROM LOGICUSER WHERE USERID=#{userid} AND USERPWD=#{userpwd}
+	</select>
 	
+	<select id="checkLogicUser_Userid" parameterType="String" resultType="Integer">
+		SELECT COUNT(USERID) FROM LOGICUSER WHERE USERID=#{userid}
+	</select>
+	
+	<insert id="insertLogicUser" parameterType="LogicUser" >
+		INSERT INTO LOGICUSER(USERID,USERPWD) VALUES(#{userid},#{userpwd})
+	</insert>
+	
+	<select id="countLogicMap" resultType="Integer">
+		SELECT COUNT(MAPID) FROM LOGICMAP
+	</select>
+	
+	<select id="selectLogicList" resultType="LogicMap">
+		SELECT MAPID,MAPNAME,WIDTH,HEIGHT,USERID FROM LOGICMAP
+		<if test="_parameter != null">
+		WHERE MAPNAME like '%' || #{searchText} || '%'
+		</if>
+		ORDER BY MAPID DESC
+	</select>
+	
+	<insert id="insertLogicMap" parameterType="LogicMap">
+		INSERT INTO LOGICMAP(MAPID,MAPNAME,WIDTH,HEIGHT,USERID,CONTENT)
+		VALUES
+		((SELECT COUNT(MAPID)+1 FROM LOGICMAP),#{mapname},#{width},#{height},#{userid},#{content})
+	</insert>
+	
+	<select id="selectLogicMap" resultType="LogicMap">
+		SELECT MAPID,MAPNAME,WIDTH,HEIGHT,USERID,CONTENT FROM LOGICMAP
+		WHERE MAPID=#{mapid}
+	</select>
 	
 </mapper>

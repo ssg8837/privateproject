@@ -1,9 +1,8 @@
 
-
 $(
 	function()
 	{
-		$("#openMenu").on('click',
+		$("#login").on('click',
 		function()
 		{
 			$.ajax(
@@ -16,7 +15,7 @@ $(
 				{
 					if(data==true)
 					{
-						$(location).attr('href', 'home');
+						$(location).attr('href', './');
 					}
 					if(data!=true)
 					{
