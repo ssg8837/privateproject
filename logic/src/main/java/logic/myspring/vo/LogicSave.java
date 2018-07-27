@@ -1,23 +1,19 @@
 package logic.myspring.vo;
 
 public class LogicSave {
-	private int saveid;
 	private int mapid;
-	private String id;
+	private String userid;
 	private String content;
 	
 	public LogicSave() {}
-	public LogicSave(int saveid, int mapid, String id, String content) {
-		this.saveid = saveid;
+	public LogicSave(int mapid, String userid) {
 		this.mapid = mapid;
-		this.id = id;
+		this.userid = userid;
+	}
+	public LogicSave(int mapid, String userid, String content) {
+		this.mapid = mapid;
+		this.userid = userid;
 		this.content = content;
-	}
-	public int getSaveid() {
-		return saveid;
-	}
-	public void setSaveid(int saveid) {
-		this.saveid = saveid;
 	}
 	public int getMapid() {
 		return mapid;
@@ -25,11 +21,11 @@ public class LogicSave {
 	public void setMapid(int mapid) {
 		this.mapid = mapid;
 	}
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getContent() {
 		return content;
@@ -37,5 +33,10 @@ public class LogicSave {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	@Override
+	public String toString() {
+		return "LogicSave [mapid=" + mapid + ", userid=" + userid + ", content=" + content + "]";
+	}
+	
 	
 }

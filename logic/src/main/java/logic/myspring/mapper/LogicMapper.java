@@ -1,11 +1,11 @@
 package logic.myspring.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 
 import logic.myspring.vo.LogicMap;
+import logic.myspring.vo.LogicSave;
 import logic.myspring.vo.LogicUser;
 
 public interface LogicMapper 
@@ -17,4 +17,7 @@ public interface LogicMapper
 	public List<LogicMap> selectLogicList(String searchText, RowBounds rb);
 	public int insertLogicMap(LogicMap logicMap);
 	public LogicMap selectLogicMap(int mapid);
+	public int insertLogicSave(LogicSave save);
+	public int deleteLogicSave(LogicSave save);
+	public LogicSave selectLogicSave(LogicSave save);
 }

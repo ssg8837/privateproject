@@ -51,6 +51,7 @@
 	  			<div class="form-group">
 	    			<div class="col-sm-offset-2 col-sm-10">
 	     				<button id="createLogic" type="button" class="btn btn-default">작성</button>
+    					<a href="openLogicList"><button type="button" class="btn btn-primary" >돌아가기</button></a>
 	    			</div>
 	  			</div>
 			</div>

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import logic.myspring.mapper.LogicMapper;
 import logic.myspring.util.PageReader;
 import logic.myspring.vo.LogicMap;
+import logic.myspring.vo.LogicSave;
 import logic.myspring.vo.LogicUser;
-import logic.myspring.vo.MapForAjax;
 
 
 
@@ -80,6 +80,18 @@ public class HomeController {
 		LogicMap map=mapper.selectLogicMap(mapid);
 		model.addAttribute("map", map);
 		String loginid=(String)httpSession.getAttribute("loginid");
+		LogicSave save=mapper.selectLogicSave(new LogicSave(mapid,loginid));
+		System.out.println(save);
+		if(save!=null)
+		{
+			model.addAttribute("savedlogic", save.getContent());
+			model.addAttribute("saved", "true");
+		}
+		else
+		{
+			
+			model.addAttribute("saved", "false");
+		}
 		model.addAttribute("loginid",loginid);
 		return "logicPlay";
 	}
@@ -134,7 +146,7 @@ public class HomeController {
 		}
 		return forreturn;
 	}
-	//
+	//로직 퍼즐 만들기
 	@RequestMapping(value = "/createLogic", method = RequestMethod.POST)
 	public @ResponseBody boolean createLogic(LogicMap map) 
 	{
@@ -142,6 +154,23 @@ public class HomeController {
 		System.out.println(map);
 		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
 		int result=mapper.insertLogicMap(map);
+		if(result>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	@RequestMapping(value = "/saveLogic", method = RequestMethod.POST)
+	public @ResponseBody boolean saveLogic(LogicSave save) 
+	{
+		
+		System.out.println(save);
+		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
+		mapper.deleteLogicSave(save);
+		int result=mapper.insertLogicSave(save);
 		if(result>0)
 		{
 			return true;

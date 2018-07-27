@@ -19,9 +19,12 @@
 			<div class="form-horizontal" >
 				
 					<input type="hidden" id="loginid" name="loginid" value="${loginid }">
+					<input type="hidden" id="mapid" name="mapid" value="${map.mapid }">
 					<input type="hidden" id="width" name="width" value="${map.width }">
 					<input type="hidden" id="height" name="height" value="${map.height }">
 					<input type="hidden" id="logic" name="logic" value="${map.content }">
+					<input type="hidden" id="savedlogic" name="savedlogic" value="${savedlogic }">
+					<input type="hidden" id="saved" name="saved" value="${saved }">
 				<div class="form-group">
 					<label for="userid" class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
@@ -29,6 +32,12 @@
 					</div>
 				</div>
 	 			<div class="form-group" >
+		 			<label class="radio-inline">
+						<input type="radio" name="optionRadio" id="inlineRadio1" value="black" checked="checked"> 칠하기
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optionRadio" id="inlineRadio2" value="checkX">X표시하기
+					</label>
 					<table>
 						<tbody id="logicTable" class="table table-bordered">
 						<tr>
@@ -41,7 +50,7 @@
 								<tr>
 									<th><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
 									<c:forEach var='j' begin='1' end='${map.height }' step='1'>
-										<td param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
+										<td id="td_${i-1 }_${j-1 }" param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
 									</c:forEach>
 								</tr>
 							</c:forEach>
@@ -51,7 +60,10 @@
 	  			
 	  			<div class="form-group">
 	    			<div class="col-sm-offset-2 col-sm-10">
-	     				<button id="createLogic" type="button" class="btn btn-default">작성</button>
+	     				<button id="submitLogic" type="button" class="btn btn-default">제출</button>
+	     				<button id="saveLogic" type="button" class="btn btn-default">저장</button>
+	     				<button type="button" class="btn btn-default" onClick="window.location.reload()">새로 고침</button>
+    					<a href="openLogicList"><button type="button" class="btn btn-primary" >돌아가기</button></a>
 	    			</div>
 	  			</div>
 			</div>

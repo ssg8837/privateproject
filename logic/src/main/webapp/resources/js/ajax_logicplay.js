@@ -3,6 +3,10 @@ var answerArr=new Array();
 var height;
 var width;
 var logic;
+var BLANK=0;
+var CORRECT=1;
+var WRONG=2;
+var XCHECK=3;
 
 function upDown(y)
 {
@@ -53,7 +57,8 @@ $(
 		logic=$('#logic').val();
 		height=$('#height').val();
 		width=$('#width').val();
-		alert(logic);
+		saved=$('#saved').val();
+		savedlogic=$('#savedlogic').val();
 		var k=0;
 		for(var i=0;i<height;i++)
 		{
@@ -63,7 +68,28 @@ $(
 			{
 				answerArr[i][j]=logic.charAt(k);
 				//alert(answerArr[i][j]);
-				logicArr[i][j]='0';
+				if(saved=="true")
+				{
+					var td_id="#td_"+i+"_"+j;
+					logicArr[i][j]=savedlogic.charAt(k);
+					if(logicArr[i][j]==CORRECT)
+					{
+						$(td_id).addClass("tdClick");
+					}
+					else if(logicArr[i][j]==WRONG)
+					{	
+						$(td_id).addClass("tdWrong");
+					}
+					else if(logicArr[i][j]==XCHECK)
+					{
+						$(td_id).addClass("tdXCheck");
+					}
+					
+				}
+				else if(saved=="false")
+				{
+					logicArr[i][j]='0';
+				}
 				k++
 			}
 		}//배열을 넓이와 높이로 계산된 크기만큼 만듬
@@ -76,23 +102,42 @@ $(
 			upDown(j);
 		}
 
-		$('#logic').val('');
+//		$('#logic').val('');
+//		$('#savedlogic').val('');
+		
 		$("td").click(function()
 		{
+			var option=$('[name=optionRadio]:checked').val();
 			var x=$(this).attr('param1');
 			var y=$(this).attr('param2');
-			if(logicArr[x][y]==1)
+			if(logicArr[x][y]==BLANK)
 			{
-				logicArr[x][y]=0;
-				$(this).removeClass("tdClick");
+				if(option=='black')
+				{
+					if(answerArr[x][y]==CORRECT)
+					{
+						logicArr[x][y]=CORRECT;
+						$(this).addClass("tdClick");
+					}
+					else
+					{
+						logicArr[x][y]=WRONG;
+						$(this).addClass("tdWrong");
+					}
+				}
+				else
+				{
+					logicArr[x][y]=XCHECK;
+					$(this).addClass("tdXCheck");
+				}
 			}
-			else
+			else if(logicArr[x][y]==XCHECK)
 			{
-				logicArr[x][y]=1;
-				$(this).addClass("tdClick");
+				logicArr[x][y]=BLANK;
+				$(this).removeClass("tdXCheck");
 			}
 			//alert(x+", "+y+" = "+logicArr[x][y]);
-		});//색칠하고 배열에 저장
+		});//표의 칸을 눌럿을때 정답 오답 x표시를 나눔.
 		
 		$("td").hover(function(){
 			$(this).addClass("thishover");},
@@ -110,25 +155,23 @@ $(
 		$("tr").hover(function(){$(this).children("td").addClass("trhover");},function(){$(this).children("td").removeClass("trhover");});
 
 		//로직 저장햇을때 컨트롤러로 보냄
-		$("#createLogic").click(function(){
-			var logic="";
+		$("#saveLogic").click(function(){
+			var logic_save="";
 			for(var i=0;i<height;i++)
 			{
 				for(var j=0;j<width;j++)
 				{
-					logic+=logicArr[i][j];
+					logic_save+=logicArr[i][j];
 				}
 			}
 				
 			$.ajax(
 					{
-						url : "createLogic",
+						url : "saveLogic",
 						type : "post",
 						data :{ "userid" : $("#loginid").val(),
-								"mapname" : $("#title").val(),
-								"height":height,
-								"width":width,
-								"content":logic},
+								"mapid" : $("#mapid").val(),
+								"content":logic_save},
 						success : function(data)//data는 서버가 보내준 값을 의미함.
 						{
 							if(data)

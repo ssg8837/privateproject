@@ -41,4 +41,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE MAPID=#{mapid}
 	</select>
 	
+	<delete id="deleteLogicSave" parameterType="LogicSave">
+		DELETE FROM LOGICSAVE
+		WHERE MAPID=#{mapid} AND USERID=#{userid}
+	</delete>
+	
+	<insert id="insertLogicSave" parameterType="LogicSave">
+		INSERT INTO LOGICSAVE(MAPID,USERID,CONTENT)
+		VALUES
+		(#{mapid},#{userid},#{content})
+	</insert>
+	
+	<select id="selectLogicSave" resultType="LogicSave" parameterType="LogicSave">
+		SELECT MAPID,USERID,CONTENT FROM LOGICSAVE
+		WHERE MAPID=#{mapid} AND USERID=#{userid}
+	</select>
+	
 </mapper>

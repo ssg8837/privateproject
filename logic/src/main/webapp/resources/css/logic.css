@@ -20,3 +20,16 @@ td,th
 {
 	background-color: #000000;
 }
+.tdXCheck
+{
+	background-image:url('../../resources/images/letterx_black.png');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.tdWrong
+{
+	background-image:url('../../resources/images/letterx_red.png');
+	background-color: #ff9999;
+	background-repeat:no-repeat;
+	background-size:cover;
+}
