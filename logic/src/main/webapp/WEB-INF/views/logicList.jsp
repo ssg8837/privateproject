@@ -13,6 +13,7 @@
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/cover.css" rel="stylesheet">
 	    <link href="./resources/css/logicList.css" rel="stylesheet">
+	    <link href="./resources/css/form-control.css" rel="stylesheet">
 	
 	    <script>
 	    
@@ -64,10 +65,26 @@
 			
 			<a href="board?page=${navi.totalPageCount}&searchText=${searchText}"><button class="btn btn-primary">맨 뒤로 가기</button></a>
     	</p>
-    	<a href="openCreateLogic"><button type="button" class="btn btn-primary" >로직 만들기</button></a>
+    	<c:if test="${sessionScope.loginid != null }">
+	    	<form action='openCreateLogic' method='post'>
+	    		<label>가로: </label>
+	    		<select name="width" id="width" class="form-control2">
+					<c:forEach var="i" begin='5' end='15' step='1'>
+						<option value='${i }'>${i }</option>
+					</c:forEach>
+				</select>
+	    		<label>세로: </label><select name="height" id="height" class="form-control2">
+					<c:forEach var="i" begin='5' end='15' step='1'>
+						<option value='${i }'>${i }</option>
+					</c:forEach>
+				</select>
+	    			<button type="submit" class="btn btn-primary" >로직 만들기</button>
+	    	</form>
+    	</c:if>
+    	</div>
       </div>
 
-    </div>
+    	<a href="./"><button type="button" class="btn btn-primary" >돌아가기</button></a>
   
 
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->

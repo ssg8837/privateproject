@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-	    <title>메인 화면</title>
+	    <title>게임 방법</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="./resources/js/ajax_login.js"></script>	
 	    <!-- 부트스트랩 -->
@@ -24,29 +24,11 @@
 	
 	<body> 
 	    
-	    <h1>로그인</h1>
-		<form class="form-horizontal" action="login" method="post">
-			
-			<div class="form-group">
-				<label for="userid" class="col-sm-2 control-label">ID</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" style="width:80%" id="userid" name="userid" placeholder="ID">
-				</div>
-			</div>
- 			<div class="form-group">
-				<label for="userpwd" class="col-sm-2 control-label">비밀번호</label>
-				<div class="col-sm-10">
-	      			<input type="password" class="form-control" style="width:80%" id="userpwd" name="userpwd" placeholder="Password">
-	    		</div>
-  			</div>
-  			
-  			<div class="form-group">
-    			<div class="col-sm-offset-2 col-sm-10">
-     				<button id="login" type="button" class="btn btn-default">로그인</button>
-     				<a href='./'><button type="button" class="btn btn-default">돌아가기</button></a>
-    			</div>
-  			</div>
-		</form>
+	    <h1>간단설명</h1>
+		<div class="form-horizontal" >
+			<p>1) 표시되어 있는 숫자에 따라서 해당하는 열의 가로와 세로 방향에 그 숫자만큼의 칸을 연속해서 칠합니다.</p>
+			<p>2) 숫자가 2개 이상 존재하는 열에서는 표시되어 있는 숫자의 순서에 따라 칠하고, 두 숫자를 연결해 칠하는 것이 아니라 두 숫자 사이에는 1칸 이상의 공백을 두고 칠합니다.</p>
+		</div>
 
 	    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

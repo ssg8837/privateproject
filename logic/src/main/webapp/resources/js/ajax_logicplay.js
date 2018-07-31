@@ -60,12 +60,30 @@ $(
 		saved=$('#saved').val();
 		savedlogic=$('#savedlogic').val();
 		var k=0;
+		for(var j=0;j<width;j++)
+		{
+			if(j%5==4)
+			{
+				var thname="#th_"+j;
+				$(thname).addClass('tdborderbold');
+			}	
+		}
 		for(var i=0;i<height;i++)
 		{
+			if(i%5==4)
+			{
+				var trname="#tr_"+i;
+				$(trname).addClass('trborderbold');
+			}	
 			logicArr[i]=new Array();
 			answerArr[i]=new Array();
 			for(var j=0;j<width;j++)
 			{
+				if(j%5==4)
+				{
+					var tdname="#td_"+i+"_"+j;
+					$(tdname).addClass('tdborderbold');
+				}	
 				answerArr[i][j]=logic.charAt(k);
 				//alert(answerArr[i][j]);
 				if(saved=="true")
@@ -102,8 +120,8 @@ $(
 			upDown(j);
 		}
 
-//		$('#logic').val('');
-//		$('#savedlogic').val('');
+		$('#logic').val('');
+		$('#savedlogic').val('');
 		
 		$("td").click(function()
 		{
@@ -142,17 +160,19 @@ $(
 		$("td").hover(function(){
 			$(this).addClass("thishover");},
 			function(){$(this).removeClass("thishover");});
-		var allCells = $("td");
-		allCells
+		var allCells = $("td, th");
+		allCells.filter("td")
 		  .on("mouseover", function() {
 			var el = $(this);
 			var pos = el.index();
 			allCells.filter(":nth-child(" + (pos+1) + ")").addClass("trhover");
+			$(this).parent('tr').addClass("trhover");
 		  })
 		  .on("mouseout", function() {
 			allCells.removeClass("trhover");
+			$(this).parent('tr').removeClass("trhover");
 		  });
-		$("tr").hover(function(){$(this).children("td").addClass("trhover");},function(){$(this).children("td").removeClass("trhover");});
+	//	$("tr").hover(function(){$(this).children("td").addClass("trhover");},function(){$(this).children("td").removeClass("trhover");});
 
 		//로직 저장햇을때 컨트롤러로 보냄
 		$("#saveLogic").click(function(){
@@ -188,6 +208,49 @@ $(
 							alert("통신에러");
 						}
 					});
+		});
+		//세이브 파일 삭제
+		$("#deleteLogicSave").click(function(){
+				
+			$.ajax(
+					{
+						url : "deleteLogicSave",
+						type : "post",
+						data :{ "userid" : $("#loginid").val(),
+								"mapid" : $("#mapid").val()},
+						success : function(data)//data는 서버가 보내준 값을 의미함.
+						{
+							if(data)
+							{
+								window.location.reload();
+							}
+							else
+							{
+								alert("관리자에게 문의하세요.");
+							}
+						},
+						error : function(data)
+						{
+							alert("통신에러");
+						}
+					});
+		});
+		//1버튼 눌럿을시 x 칠하기 변경
+		$('body').on('keydown', function(event){
+			if(event.keyCode==	17)
+			{
+				var option=$('[name=optionRadio]:checked').val();
+				if(option!='black')
+				{
+					$('[name=optionRadio]:input[value="checkX"]').attr("checked",false);
+					$('[name=optionRadio]:input[value="black"]').attr("checked",true);
+				}
+				else
+				{
+					$('[name=optionRadio]:input[value="black"]').attr("checked",false);
+					$('[name=optionRadio]:input[value="checkX"]').attr("checked",true);
+				}
+			}
 		});
 	}
 );

@@ -8,17 +8,25 @@ td,th
 	border: 1px solid #000000;
 	color:#000000;
 }
+.trborderbold
+{
+	border-bottom: 2px solid #000000;
+}
+.tdborderbold
+{
+	border-right: 2px solid #000000;
+}
 .trhover
 {
-	background-color: #bbbbbb;
+	background-color: #ffff80;
 }
 .thishover
 {
-	background-color: #777777;
+	background-color: #bbbbbb;
 }
 .tdClick
 {
-	background-color: #000000;
+	background-color: #808080;
 }
 .tdXCheck
 {

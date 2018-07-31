@@ -38,17 +38,18 @@
 					<label class="radio-inline">
 						<input type="radio" name="optionRadio" id="inlineRadio2" value="checkX">X표시하기
 					</label>
+	  				<p>※ Ctrl 키를 누르면 키보드로도 변경할 수 있습니다 ※</p>
 					<table>
 						<tbody id="logicTable" class="table table-bordered">
-						<tr>
-							<th id='th_0_0'><div style="width: 150px; height:150px" ></div></th>
+						<tr class="trborderbold">
+							<th class="tdborderbold" id='th_0_0'><div style="width: 150px; height:150px" ></div></th>
 							<c:forEach var='j' begin='1' end='${map.width }' step='1'>
-								<th style="vertical-align: bottom;"><div id="updown_${j-1}" style="width: 30px; height:150px " ></div></th>
+								<th id="th_${j-1 }" style="vertical-align: bottom;"><div id="updown_${j-1}" style="width: 30px; height:150px " ></div></th>
 							</c:forEach>
 						</tr>
 							<c:forEach var='i' begin='1' end='${map.height }' step='1'>
-								<tr>
-									<th><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
+								<tr id="tr_${i-1 }">
+									<th class="tdborderbold"><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
 									<c:forEach var='j' begin='1' end='${map.height }' step='1'>
 										<td id="td_${i-1 }_${j-1 }" param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
 									</c:forEach>
@@ -61,11 +62,17 @@
 	  			<div class="form-group">
 	    			<div class="col-sm-offset-2 col-sm-10">
 	     				<button id="submitLogic" type="button" class="btn btn-default">제출</button>
-	     				<button id="saveLogic" type="button" class="btn btn-default">저장</button>
+	     				<c:if test="${sessionScope.loginid != null }">
+	     					<button id="saveLogic" type="button" class="btn btn-default">저장</button>
+	     				</c:if>
+	     				<c:if test='${saved == "true"}'>
+	     					<button id="deleteLogicSave" type="button" class="btn btn-default">저장 초기화</button>
+	     				</c:if>
 	     				<button type="button" class="btn btn-default" onClick="window.location.reload()">새로 고침</button>
     					<a href="openLogicList"><button type="button" class="btn btn-primary" >돌아가기</button></a>
 	    			</div>
 	  			</div>
+	  			<p>※ 새로 고침 시 마지막으로 저장된 구간으로 돌아갑니다 ※</p>
 			</div>
   		
   

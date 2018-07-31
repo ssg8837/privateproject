@@ -30,17 +30,17 @@
 	 			<div class="form-group" >
 					<table>
 						<tbody id="logicTable" class="table table-bordered">
-						<tr>
-							<th id='th_0_0'><div style="width: 150px; height:150px" ></div></th>
+						<tr class='trborderbold'>
+							<th id='th_0' class='tdborderbold'><div style="width: 150px; height:150px" ></div></th>
 							<c:forEach var='j' begin='1' end='${width }' step='1'>
-								<th style="vertical-align: bottom;"><div id="updown_${j-1}" style="width: 30px; height:150px " ></div></th>
+								<th id="th_${j-1 }" style="vertical-align: bottom;"><div id="updown_${j-1}" style="width: 30px; height:150px " ></div></th>
 							</c:forEach>
 						</tr>
 							<c:forEach var='i' begin='1' end='${height }' step='1'>
-								<tr>
-									<th><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
-									<c:forEach var='j' begin='1' end='${height }' step='1'>
-										<td param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
+								<tr id="tr_${i-1 }">
+									<th class='tdborderbold'><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
+									<c:forEach var='j' begin='1' end='${width }' step='1'>
+										<td id="td_${i-1 }_${j-1 }" param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
 									</c:forEach>
 								</tr>
 							</c:forEach>

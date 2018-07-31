@@ -45,6 +45,11 @@ public class HomeController {
 	{		
 		return "home";
 	}
+	@RequestMapping(value = "/howplay", method = RequestMethod.GET)
+	public String howplay()
+	{		
+		return "howplay";
+	}
 	@RequestMapping(value = "/openNewUser", method = RequestMethod.GET)
 	public String openNewUser()
 	{		
@@ -56,14 +61,14 @@ public class HomeController {
 		return "login";
 	}
 	//openCreateLogic
-	@RequestMapping(value = "/openCreateLogic", method = RequestMethod.GET)
-	public String openCreateLogic(Model model)
+	@RequestMapping(value = "/openCreateLogic", method = RequestMethod.POST)
+	public String openCreateLogic(Model model,String width, String height)
 	{	
 		String loginid=(String)httpSession.getAttribute("loginid");
 		if(loginid!=null)
 		{
-			model.addAttribute("width", 15);
-			model.addAttribute("height", 15);
+			model.addAttribute("width", Integer.parseInt(width));
+			model.addAttribute("height", Integer.parseInt(height));
 			model.addAttribute("loginid",loginid);
 			return "createLogic";
 		}
@@ -81,7 +86,6 @@ public class HomeController {
 		model.addAttribute("map", map);
 		String loginid=(String)httpSession.getAttribute("loginid");
 		LogicSave save=mapper.selectLogicSave(new LogicSave(mapid,loginid));
-		System.out.println(save);
 		if(save!=null)
 		{
 			model.addAttribute("savedlogic", save.getContent());
@@ -151,7 +155,6 @@ public class HomeController {
 	public @ResponseBody boolean createLogic(LogicMap map) 
 	{
 		
-		System.out.println(map);
 		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
 		int result=mapper.insertLogicMap(map);
 		if(result>0)
@@ -167,10 +170,24 @@ public class HomeController {
 	public @ResponseBody boolean saveLogic(LogicSave save) 
 	{
 		
-		System.out.println(save);
 		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
 		mapper.deleteLogicSave(save);
 		int result=mapper.insertLogicSave(save);
+		if(result>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	@RequestMapping(value = "/deleteLogicSave", method = RequestMethod.POST)
+	public @ResponseBody boolean deleteLogicSave(LogicSave save) 
+	{
+		
+		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
+		int result=mapper.deleteLogicSave(save);
 		if(result>0)
 		{
 			return true;

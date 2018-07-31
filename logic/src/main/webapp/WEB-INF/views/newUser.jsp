@@ -30,13 +30,13 @@
 			<div class="form-group">
 				<label for="userid" class="col-sm-2 control-label">ID</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="userid" name="userid" placeholder="ID">
+					<input type="text" class="form-control" id="userid" style="width:80%" name="userid" placeholder="ID">
 				</div>
 			</div>
  			<div class="form-group">
 				<label for="userpwd" class="col-sm-2 control-label">비밀번호</label>
 				<div class="col-sm-10">
-	      			<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Password">
+	      			<input type="password" class="form-control" id="userpwd" style="width:80%" name="userpwd" placeholder="Password">
 	    		</div>
   			</div>
   			

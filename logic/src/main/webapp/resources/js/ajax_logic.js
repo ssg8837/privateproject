@@ -52,9 +52,19 @@ $(
 		width=$('#width').val();
 		for(var i=0;i<height;i++)
 		{
+			if(i%5==4)
+			{
+				var trname="#tr_"+i;
+				$(trname).addClass('trborderbold');
+			}	
 			logicArr[i]=new Array();
 			for(var j=0;j<width;j++)
 			{
+				if(j%5==4)
+				{
+					var tdname="#td_"+i+"_"+j;
+					$(tdname).addClass('tdborderbold');
+				}
 				logicArr[i][j]='0';
 			}
 		}//배열을 넓이와 높이로 계산된 크기만큼 만듬
