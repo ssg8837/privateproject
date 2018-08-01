@@ -1,5 +1,6 @@
 package logic.myspring.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import logic.myspring.mapper.LogicMapper;
 import logic.myspring.util.PageReader;
+import logic.myspring.vo.LogicEnd;
 import logic.myspring.vo.LogicMap;
 import logic.myspring.vo.LogicSave;
 import logic.myspring.vo.LogicUser;
-
 
 
 /**
@@ -27,7 +28,12 @@ import logic.myspring.vo.LogicUser;
  */
 @Controller
 public class HomeController {
-	
+
+	final int BLANK='0';
+	final int CORRECT='1';
+	final int WRONG='2';
+	final int XCHECK='3';
+
 	@Autowired
 	SqlSession sqlSession;
 	
@@ -99,6 +105,61 @@ public class HomeController {
 		model.addAttribute("loginid",loginid);
 		return "logicPlay";
 	}
+	
+	@RequestMapping(value = "/openLogicShow", method = RequestMethod.POST)
+	public String openLogicShow(Model model, String userid,String mapid)
+	{	
+		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);		
+		LogicEnd result=mapper.selectLogicEnd(new LogicEnd(mapid, userid));
+
+		LogicMap map=mapper.selectLogicMap(Integer.parseInt(mapid));
+		if(result!=null)
+		{
+			model.addAttribute("userid", userid);
+			model.addAttribute("width", map.getWidth());
+			model.addAttribute("title", map.getMapname());
+			model.addAttribute("height", map.getHeight());
+			model.addAttribute("logic", result.getContent());
+			return "showLogic";
+		}
+		else
+		{
+			return "home";
+		}
+	}
+	
+	@RequestMapping(value = "/openShowClear", method = RequestMethod.POST)
+	public String openShowClear(Model model, String userid)
+	{	
+		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);		
+		List<LogicEnd> result=mapper.selectLogicEndList(userid);
+		if(result!=null)
+		{
+			String[] title=new String[result.size()];
+			String[] maker=new String[result.size()];
+			int[] howwrong=new int[result.size()];
+			String[] mapid=new String[result.size()];
+			for(int i=0;i<result.size();i++)
+			{
+				LogicEnd temp=result.get(i);
+				LogicMap map=mapper.selectLogicMap(Integer.parseInt(temp.getMapid()));
+				howwrong[i]=temp.getHowwrong();
+				title[i]=map.getMapname();
+				maker[i]=map.getUserid();
+				mapid[i]=temp.getMapid();
+			}
+			model.addAttribute("howwrong", howwrong);
+			model.addAttribute("title", title);
+			model.addAttribute("maker", maker);
+			model.addAttribute("mapid", mapid);
+			return "ShowClear";
+		}
+		else
+		{
+			return "home";
+		}
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout()
 	{
@@ -196,5 +257,28 @@ public class HomeController {
 		{
 			return false;
 		}
+	}
+	//endLogicGame
+	@RequestMapping(value = "/endLogicGame", method = RequestMethod.POST)
+	public @ResponseBody int endLogicGame(LogicEnd end) 
+	{
+		
+		LogicMapper mapper=sqlSession.getMapper(LogicMapper.class);
+		String corretAns=mapper.selectLogicMap(Integer.parseInt(end.getMapid())).getContent();
+		String content=end.getContent();
+		int howWrong=end.getHowwrong();
+		for(int i=0;i<content.length();i++)
+		{
+			char num=content.charAt(i);
+			char correctNum=corretAns.charAt(i);
+			if(correctNum==CORRECT&&num!=CORRECT)
+			{
+				howWrong++;
+			}
+		}
+		end.setHowwrong(howWrong);
+		mapper.deleteLogicEnd(end);
+		mapper.insertLogicEnd(end);
+		return howWrong;
 	}
 }

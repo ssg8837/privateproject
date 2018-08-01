@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-	    <title>메인 화면</title>
+	    <title>로직리스트</title>
 	
 	    <!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
@@ -41,18 +41,18 @@
 	    	</tbody>
     	</table>
     	<p>
-    		<a href="board?page=1&searchText=${searchText}"><button class="btn btn-primary">맨 앞으로 가기</button></a>
+    		<a href="openLogicList?page=1&searchText=${searchText}"><button class="btn btn-primary">맨 앞으로 가기</button></a>
 			
 			<c:if test="${pageNum == 1}">
 				<input type="button"  class="btn btn-primary" type="button" value="이전" readonly="readonly">
 			</c:if>
 			
 			<c:if test="${pageNum > 1}">
-				<input type="submit" class="btn btn-primary" value="이전" onclick="location.href='board?page=${pageNum - 1}&searchText=${searchText}'">
+				<input type="submit" class="btn btn-primary" value="이전" onclick="location.href='openLogicList?page=${pageNum - 1}&searchText=${searchText}'">
 			</c:if>
 			
 			<c:forEach var="pageNum" begin="${reader.startPageGroup}" end="${reader.endPageGroup}">
-				<a href="board?page=${pageNum}&searchText=${searchText}"><button class="btn btn-primary">${pageNum}</button></a> 
+				<a href="openLogicList?page=${pageNum}&searchText=${searchText}"><button class="btn btn-primary">${pageNum}</button></a> 
 			</c:forEach>
 			
 			<c:if test="${reader.currentPage == reader.totalPageCount}">
@@ -60,10 +60,10 @@
 			</c:if>
 			
 			<c:if test="${reader.currentPage < reader.totalPageCount}">
-				<input type="submit" class="btn btn-primary" value="다음" onclick="location.href='board?page=${pageNum + 1}&searchText=${searchText}'">
+				<input type="submit" class="btn btn-primary" value="다음" onclick="location.href='openLogicList?page=${pageNum + 1}&searchText=${searchText}'">
 			</c:if>
 			
-			<a href="board?page=${navi.totalPageCount}&searchText=${searchText}"><button class="btn btn-primary">맨 뒤로 가기</button></a>
+			<a href="openLogicList?page=${reader.totalPageCount}&searchText=${searchText}"><button class="btn btn-primary">맨 뒤로 가기</button></a>
     	</p>
     	<c:if test="${sessionScope.loginid != null }">
 	    	<form action='openCreateLogic' method='post'>
@@ -79,6 +79,10 @@
 					</c:forEach>
 				</select>
 	    			<button type="submit" class="btn btn-primary" >로직 만들기</button>
+	    	</form>
+	    	<form action=openShowClear method='post'>
+	    		<input type="hidden" id="userid" name="userid" value="${sessionScope.loginid }">
+	    			<button type="submit" class="btn btn-primary" >클리어 목록 보기</button>
 	    	</form>
     	</c:if>
     	</div>

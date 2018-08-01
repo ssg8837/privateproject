@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="LogicUser" type="logic.myspring.vo.LogicUser"></typeAlias>
 		<typeAlias alias="LogicSave" type="logic.myspring.vo.LogicSave"></typeAlias>
 		<typeAlias alias="LogicMap" type="logic.myspring.vo.LogicMap"></typeAlias>
+		<typeAlias alias="LogicEnd" type="logic.myspring.vo.LogicEnd"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="LogicMapper.xml" />

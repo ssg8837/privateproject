@@ -57,4 +57,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE MAPID=#{mapid} AND USERID=#{userid}
 	</select>
 	
+	<delete id="deleteLogicEnd" parameterType="LogicEnd">
+		DELETE FROM LOGICEND
+		WHERE MAPID=#{mapid} AND USERID=#{userid}
+	</delete>
+	
+	<insert id="insertLogicEnd" parameterType="LogicEnd">
+		INSERT INTO LOGICEND(MAPID,USERID,HOWWRONG,CONTENT)
+		VALUES
+		(#{mapid},#{userid},#{howwrong},#{content})
+	</insert>
+	
+	<select id="selectLogicEnd" resultType="LogicEnd" parameterType="LogicEnd">
+		SELECT MAPID,USERID,HOWWRONG,CONTENT
+		FROM LOGICEND
+		WHERE MAPID=#{mapid} AND USERID=#{userid}
+	</select>
+	
+	
+	<select id="selectLogicEndList" resultType="LogicEnd" parameterType="String">
+		SELECT MAPID,HOWWRONG
+		FROM LOGICEND
+		WHERE USERID=#{userid}
+	</select>
+	
+	
 </mapper>

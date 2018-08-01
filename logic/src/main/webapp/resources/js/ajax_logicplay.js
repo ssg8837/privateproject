@@ -7,6 +7,7 @@ var BLANK=0;
 var CORRECT=1;
 var WRONG=2;
 var XCHECK=3;
+var howWrong;
 
 function upDown(y)
 {
@@ -54,6 +55,7 @@ function leftRight(x)
 $(
 	function()
 	{
+		howWrong=0;
 		logic=$('#logic').val();
 		height=$('#height').val();
 		width=$('#width').val();
@@ -97,6 +99,7 @@ $(
 					else if(logicArr[i][j]==WRONG)
 					{	
 						$(td_id).addClass("tdWrong");
+						howWrong++;
 					}
 					else if(logicArr[i][j]==XCHECK)
 					{
@@ -141,6 +144,11 @@ $(
 					{
 						logicArr[x][y]=WRONG;
 						$(this).addClass("tdWrong");
+						howWrong++;
+						if(howWrong>=5)
+						{
+							window.location.reload();
+						}
 					}
 				}
 				else
@@ -252,7 +260,50 @@ $(
 				}
 			}
 		});
+		//제출시 채점해줌.
+		$('#submitLogic').on('click',function(){
+			var logic_save="";
+			for(var i=0;i<height;i++)
+			{
+				for(var j=0;j<width;j++)
+				{
+					logic_save+=logicArr[i][j];
+				}
+			}
+			$.ajax(
+					{
+						url : "endLogicGame",
+						type : "post",
+						data :{ "userid" : $("#loginid").val(),
+								"mapid" : $("#mapid").val(),
+								"content":logic_save,
+								"howwrong":howWrong},
+						success : function(data)//data는 서버가 보내준 값을 의미함.
+						{
+							if(data)
+							{
+								if(data-howWrong!=0)
+									alert(data+"개 틀리셨습니다.\n"+(data-howWrong)+"칸을 체크를 덜 하신 것 같군요.");
+								else
+									alert(data+"개 틀리셨습니다.");
+								
+							}
+							else
+							{
+								alert("다 맞으셨습니다.");
+							}
+							openLogicShow($("#loginid").val(),$("#mapid").val());
+						},
+						error : function(data)
+						{
+							alert("통신에러");
+						}
+					});
+			
+		});
 	}
 );
+
+
 
 

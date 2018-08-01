@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 
+import logic.myspring.vo.LogicEnd;
 import logic.myspring.vo.LogicMap;
 import logic.myspring.vo.LogicSave;
 import logic.myspring.vo.LogicUser;
@@ -20,4 +21,8 @@ public interface LogicMapper
 	public int insertLogicSave(LogicSave save);
 	public int deleteLogicSave(LogicSave save);
 	public LogicSave selectLogicSave(LogicSave save);
+	public void deleteLogicEnd(LogicEnd end);
+	public int insertLogicEnd(LogicEnd end);
+	public LogicEnd selectLogicEnd(LogicEnd logicEnd);
+	public List<LogicEnd> selectLogicEndList(String userid);
 }

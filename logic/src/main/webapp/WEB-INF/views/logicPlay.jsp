@@ -15,7 +15,7 @@
 	    <link href="./resources/css/logic.css" rel="stylesheet">
   </head>
 	<body>
-		<h1>로직 등록</h1>
+		<h1>${map.mapname }</h1>
 			<div class="form-horizontal" >
 				
 					<input type="hidden" id="loginid" name="loginid" value="${loginid }">
@@ -25,12 +25,7 @@
 					<input type="hidden" id="logic" name="logic" value="${map.content }">
 					<input type="hidden" id="savedlogic" name="savedlogic" value="${savedlogic }">
 					<input type="hidden" id="saved" name="saved" value="${saved }">
-				<div class="form-group">
-					<label for="userid" class="col-sm-2 control-label">제목</label>
-					<div class="col-sm-10">
-						<input value="${map.mapname }" type="text" class="form-control" id="title" name="title" readonly>
-					</div>
-				</div>
+				
 	 			<div class="form-group" >
 		 			<label class="radio-inline">
 						<input type="radio" name="optionRadio" id="inlineRadio1" value="black" checked="checked"> 칠하기
@@ -39,6 +34,7 @@
 						<input type="radio" name="optionRadio" id="inlineRadio2" value="checkX">X표시하기
 					</label>
 	  				<p>※ Ctrl 키를 누르면 키보드로도 변경할 수 있습니다 ※</p>
+	  				<p>※ 5개 이상 틀리면 강제로 새로고침이 됩니다. ※</p>
 					<table>
 						<tbody id="logicTable" class="table table-bordered">
 						<tr class="trborderbold">
@@ -50,7 +46,7 @@
 							<c:forEach var='i' begin='1' end='${map.height }' step='1'>
 								<tr id="tr_${i-1 }">
 									<th class="tdborderbold"><div id="leftright_${i-1}" style="text-align: right;width: 150px; height:30px" ></div></th>
-									<c:forEach var='j' begin='1' end='${map.height }' step='1'>
+									<c:forEach var='j' begin='1' end='${map.width }' step='1'>
 										<td id="td_${i-1 }_${j-1 }" param1="${i-1 }" param2="${j-1 }"  )"><div style="width: 30px; height:30px" ></div></td>
 									</c:forEach>
 								</tr>
@@ -74,13 +70,14 @@
 	  			</div>
 	  			<p>※ 새로 고침 시 마지막으로 저장된 구간으로 돌아갑니다 ※</p>
 			</div>
-  		
+ 			
   
 
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./resources/js/bootstrap.min.js"></script>
+	<script src="./resources/js/openClear.js"></script>
 	<script src="./resources/js/ajax_logicplay.js"></script>	
   </body>
 </html>
