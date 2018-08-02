@@ -22,9 +22,9 @@
 					<input type="hidden" id="width" name="width" value="${width }">
 					<input type="hidden" id="height" name="height" value="${height }">
 				<div class="form-group">
-					<label for="userid" class="col-sm-2 control-label">제목</label>
+					<label for="userid" class="col-sm-2 control-label" >제목</label>
 					<div class="col-sm-10">
-						<input value="무제" type="text" class="form-control" id="title" name="title" placeholder="Title">
+						<input value="무제" type="text" class="form-control key_up" id="title" name="title" placeholder="Title">
 					</div>
 				</div>
 	 			<div class="form-group" >
@@ -62,6 +62,7 @@
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./resources/js/bootstrap.min.js"></script>
-	<script src="./resources/js/ajax_logic.js"></script>	
+	<script src="./resources/js/ajax_logic.js"></script>
+	<script src="./resources/js/key_up.js"></script>	
   </body>
 </html>

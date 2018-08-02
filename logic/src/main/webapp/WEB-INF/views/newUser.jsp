@@ -30,13 +30,13 @@
 			<div class="form-group">
 				<label for="userid" class="col-sm-2 control-label">ID</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="userid" style="width:80%" name="userid" placeholder="ID">
+					<input type="text" class="form-control key_up" id="userid" style="width:80%" name="userid" placeholder="ID">
 				</div>
 			</div>
  			<div class="form-group">
-				<label for="userpwd" class="col-sm-2 control-label">비밀번호</label>
+				<label for="userpwd" class="col-sm-2 control-label " >비밀번호</label>
 				<div class="col-sm-10">
-	      			<input type="password" class="form-control" id="userpwd" style="width:80%" name="userpwd" placeholder="Password">
+	      			<input type="password" class="form-control  key_up" id="userpwd" style="width:80%" name="userpwd" placeholder="Password">
 	    		</div>
   			</div>
   			
@@ -52,5 +52,6 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	    <script src="./resources/js/bootstrap.min.js"></script>
+	    <script src="./resources/js/key_up.js"></script>
 	</body>
 </html>
